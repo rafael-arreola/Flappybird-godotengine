@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://cbafcb7m1ifu"]
+
+[ext_resource type="Texture2D" uid="uid://cm7itp1kkty7k" path="res://assets/world/bg-day.png" id="1_euk2h"]
+[ext_resource type="Script" path="res://scenes/world.gd" id="1_jqkmx"]
+[ext_resource type="PackedScene" uid="uid://dh0aludwld4wu" path="res://scenes/Player/Bird.tscn" id="2_ysbte"]
+
+[node name="World" type="Node2D"]
+script = ExtResource("1_jqkmx")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_offset = Vector2(1, 0)
+motion_mirroring = Vector2(284, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+texture = ExtResource("1_euk2h")
+centered = false
+
+[node name="Bird" parent="." instance=ExtResource("2_ysbte")]
+position = Vector2(48, 256)
+
+[node name="Camera2D" type="Camera2D" parent="Bird"]
+offset = Vector2(96, 0)
+current = true
+limit_top = 0
+limit_bottom = 512
