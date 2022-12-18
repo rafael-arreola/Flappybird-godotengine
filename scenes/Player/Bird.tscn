@@ -25,3 +25,9 @@ frames = SubResource("SpriteFrames_0kqfd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_o8vl5")
+
+[node name="UpPosition" type="Marker2D" parent="."]
+position = Vector2(8, -24)
+
+[node name="DownPosition" type="Marker2D" parent="."]
+position = Vector2(8, 24)

@@ -5,8 +5,8 @@
 [node name="Pipes" type="Node2D"]
 
 [node name="Pipe" parent="." instance=ExtResource("1_ncyqa")]
-position = Vector2(0, -190)
+position = Vector2(0, -200)
 scale = Vector2(-1, -1)
 
 [node name="Pipe2" parent="." instance=ExtResource("1_ncyqa")]
-position = Vector2(0, 190)
+position = Vector2(0, 200)

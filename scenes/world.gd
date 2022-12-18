@@ -12,7 +12,6 @@ func _on_bird_player_start():
 
 
 func _unhandled_input(event):
-	print(event)
 	if event is InputEventScreenTouch:
 		Input.action_press("flap")
 
