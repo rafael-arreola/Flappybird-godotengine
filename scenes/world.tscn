@@ -1,12 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://cbafcb7m1ifu"]
+[gd_scene load_steps=6 format=3 uid="uid://cbafcb7m1ifu"]
 
 [ext_resource type="Texture2D" uid="uid://cm7itp1kkty7k" path="res://assets/world/bg-day.png" id="1_euk2h"]
 [ext_resource type="Script" path="res://scenes/world.gd" id="1_jqkmx"]
+[ext_resource type="PackedScene" uid="uid://dapk8vrmkd6y" path="res://scenes/pipes.tscn" id="2_h3ulp"]
 [ext_resource type="PackedScene" uid="uid://dh0aludwld4wu" path="res://scenes/Player/Bird.tscn" id="2_ysbte"]
 [ext_resource type="Texture2D" uid="uid://ba1fa0gev7g1r" path="res://assets/world/message.png" id="4_fcd5p"]
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_jqkmx")
+pipes = ExtResource("2_h3ulp")
 metadata/_edit_horizontal_guides_ = [41.0]
 metadata/_edit_vertical_guides_ = [288.0]
 
@@ -29,8 +31,14 @@ current = true
 limit_top = 0
 limit_bottom = 512
 
+[node name="Pipes" type="Node" parent="."]
+
+[node name="PipesSpawner" type="Timer" parent="Pipes"]
+wait_time = 1.5
+
 [node name="Message" type="Sprite2D" parent="."]
 position = Vector2(144, 256)
 texture = ExtResource("4_fcd5p")
 
 [connection signal="player_start" from="Bird" to="." method="_on_bird_player_start"]
+[connection signal="timeout" from="Pipes/PipesSpawner" to="." method="_on_pipes_spawner_timeout"]
