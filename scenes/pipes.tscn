@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://dapk8vrmkd6y"]
+[gd_scene load_steps=3 format=3 uid="uid://dapk8vrmkd6y"]
 
 [ext_resource type="PackedScene" uid="uid://dyd4mmt2xx3j1" path="res://scenes/Pipe.tscn" id="1_ncyqa"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h8q53"]
+size = Vector2(20, 78)
 
 [node name="Pipes" type="Node2D"]
 
@@ -10,3 +13,9 @@ scale = Vector2(-1, -1)
 
 [node name="Pipe2" parent="." instance=ExtResource("1_ncyqa")]
 position = Vector2(0, 200)
+
+[node name="Point" type="StaticBody2D" parent="." groups=["point"]]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Point"]
+shape = SubResource("RectangleShape2D_h8q53")

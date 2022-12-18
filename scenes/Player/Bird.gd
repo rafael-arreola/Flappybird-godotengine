@@ -1,6 +1,9 @@
 extends CharacterBody2D
 
 signal player_start
+signal player_die
+signal player_point
+
 
 const SPEED = 128.0
 const JUMP_VELOCITY = -256.0
@@ -20,16 +23,29 @@ func _physics_process(delta):
 	velocity.x = SPEED
 
 	if started:
-		move_and_slide()
 		if velocity.y > JUMP_VELOCITY * 0.5:
 			$AnimatedSprite2D.rotation = lerp_angle(
 				$AnimatedSprite2D.rotation, 
 				$DownPosition.position.normalized().angle(), 
 			0.1)
+		var collision = move_and_collide(velocity * delta)
+		if collision:
+			verify_if_point_or_die(collision)
 
 func flap():
 	$AnimatedSprite2D.set_frame(0)
 	$AnimatedSprite2D.play()
 	$AnimatedSprite2D.look_at($UpPosition.global_position)
 	velocity.y = JUMP_VELOCITY
+
+
+
+func verify_if_point_or_die(collision: KinematicCollision2D):
+	var collider = collision.get_collider()
+	if collider.is_in_group("point"):
+		emit_signal("player_point")
+		collider.free()
+		return 
+	if collider.is_in_group("obstacle"):
+		emit_signal("player_die")
 	
