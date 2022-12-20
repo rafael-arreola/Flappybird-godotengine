@@ -1,9 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://dh0aludwld4wu"]
+[gd_scene load_steps=10 format=3 uid="uid://dh0aludwld4wu"]
 
 [ext_resource type="Texture2D" uid="uid://c5a5jbmmfbapw" path="res://assets/bird/yellow/upflap.png" id="1_sqldf"]
 [ext_resource type="Script" path="res://scenes/Player/Bird.gd" id="1_v3u7m"]
 [ext_resource type="Texture2D" uid="uid://bb1f2ttq47g7s" path="res://assets/bird/yellow/midflap.png" id="2_ioucg"]
 [ext_resource type="Texture2D" uid="uid://cau5pg3d4oue1" path="res://assets/bird/yellow/downflap.png" id="3_eagdv"]
+[ext_resource type="AudioStream" uid="uid://ey23sq61goy0" path="res://assets/audio/wing.wav" id="5_7k3re"]
+[ext_resource type="AudioStream" uid="uid://dairllutdouxi" path="res://assets/audio/die.wav" id="6_7ww18"]
+[ext_resource type="AudioStream" uid="uid://4yfof0opfu72" path="res://assets/audio/point.wav" id="7_why5l"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_o8vl5"]
 radius = 12.0
@@ -31,3 +34,12 @@ position = Vector2(8, -24)
 
 [node name="DownPosition" type="Marker2D" parent="."]
 position = Vector2(8, 24)
+
+[node name="Fly" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_7k3re")
+
+[node name="Die" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_7ww18")
+
+[node name="Point" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_why5l")

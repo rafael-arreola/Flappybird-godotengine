@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cbafcb7m1ifu"]
+[gd_scene load_steps=8 format=3 uid="uid://cbafcb7m1ifu"]
 
 [ext_resource type="Texture2D" uid="uid://cm7itp1kkty7k" path="res://assets/world/bg-day.png" id="1_euk2h"]
 [ext_resource type="Script" path="res://scenes/world.gd" id="1_jqkmx"]
@@ -6,6 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://dh0aludwld4wu" path="res://scenes/Player/Bird.tscn" id="2_ysbte"]
 [ext_resource type="Texture2D" uid="uid://ba1fa0gev7g1r" path="res://assets/world/message.png" id="4_fcd5p"]
 [ext_resource type="Texture2D" uid="uid://buudy6cyb5p0c" path="res://assets/world/gameover.png" id="6_aa4w0"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ar0rj"]
+font_size = 26
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_jqkmx")
@@ -23,6 +26,11 @@ motion_mirroring = Vector2(284, 0)
 texture = ExtResource("1_euk2h")
 centered = false
 
+[node name="Pipes" type="Node" parent="."]
+
+[node name="PipesSpawner" type="Timer" parent="Pipes"]
+wait_time = 1.5
+
 [node name="Bird" parent="." instance=ExtResource("2_ysbte")]
 position = Vector2(48, 256)
 
@@ -32,10 +40,14 @@ current = true
 limit_top = 0
 limit_bottom = 512
 
-[node name="Pipes" type="Node" parent="."]
-
-[node name="PipesSpawner" type="Timer" parent="Pipes"]
-wait_time = 1.5
+[node name="TextEdit" type="Label" parent="Bird/Camera2D"]
+offset_left = -39.0
+offset_top = -246.0
+offset_right = 33.0
+offset_bottom = -206.0
+text = "0"
+label_settings = SubResource("LabelSettings_ar0rj")
+vertical_alignment = 1
 
 [node name="Message" type="Sprite2D" parent="."]
 position = Vector2(144, 256)
@@ -43,8 +55,11 @@ texture = ExtResource("4_fcd5p")
 
 [node name="GameOver" type="Sprite2D" parent="."]
 visible = false
+top_level = true
 position = Vector2(144, 256)
 texture = ExtResource("6_aa4w0")
 
-[connection signal="player_start" from="Bird" to="." method="_on_bird_player_start"]
 [connection signal="timeout" from="Pipes/PipesSpawner" to="." method="_on_pipes_spawner_timeout"]
+[connection signal="player_die" from="Bird" to="." method="_on_bird_player_die"]
+[connection signal="player_point" from="Bird" to="." method="_on_bird_player_point"]
+[connection signal="player_start" from="Bird" to="." method="_on_bird_player_start"]

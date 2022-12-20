@@ -20,9 +20,8 @@ func _physics_process(delta):
 			emit_signal("player_start")
 		flap()
 
-	velocity.x = SPEED
-
 	if started:
+		velocity.x = SPEED
 		if velocity.y > JUMP_VELOCITY * 0.5:
 			$AnimatedSprite2D.rotation = lerp_angle(
 				$AnimatedSprite2D.rotation, 
@@ -36,16 +35,19 @@ func flap():
 	$AnimatedSprite2D.set_frame(0)
 	$AnimatedSprite2D.play()
 	$AnimatedSprite2D.look_at($UpPosition.global_position)
+	$Fly.play()
 	velocity.y = JUMP_VELOCITY
-
-
 
 func verify_if_point_or_die(collision: KinematicCollision2D):
 	var collider = collision.get_collider()
 	if collider.is_in_group("point"):
 		emit_signal("player_point")
 		collider.free()
-		return 
+		$Point.play()
+		return
 	if collider.is_in_group("obstacle"):
 		emit_signal("player_die")
+		$Die.play()
+		collider.free()
+		started = false
 	
