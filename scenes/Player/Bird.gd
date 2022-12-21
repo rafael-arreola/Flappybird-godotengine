@@ -48,6 +48,5 @@ func verify_if_point_or_die(collision: KinematicCollision2D):
 	if collider.is_in_group("obstacle"):
 		emit_signal("player_die")
 		$Die.play()
-		collider.free()
 		started = false
 	
