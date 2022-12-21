@@ -11,7 +11,7 @@ func _on_bird_player_start():
 	if died:
 		get_tree().reload_current_scene()
 	else:
-		$Message.hide()
+		$Camera2D/Messages/StartGame.hide()
 		$Pipes/PipesSpawner.start()
 		_on_pipes_spawner_timeout()
 
@@ -31,13 +31,12 @@ func _on_pipes_spawner_timeout():
 
 func _on_bird_player_die():
 	$Pipes/PipesSpawner.stop()
-	$GameOver.show()
-	$GameOver.position.x = $Bird.position.x + 96
+	$Camera2D/Messages/GameOver.show()
 	died = true
 	
 func _on_bird_player_point():
 	points += 1
-	$Bird/Camera2D/TextEdit.text = str(points)
+	$Camera2D/Messages/Points.text = str(points)
 
-func _process(delta):
-	$Bird/Camera2D.global_transform.origin.y = 256
+func _physics_process(delta):
+	$Camera2D.position.x = $Bird.position.x

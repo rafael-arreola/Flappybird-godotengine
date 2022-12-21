@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cbafcb7m1ifu"]
+[gd_scene load_steps=9 format=3 uid="uid://cbafcb7m1ifu"]
 
 [ext_resource type="Texture2D" uid="uid://cm7itp1kkty7k" path="res://assets/world/bg-day.png" id="1_euk2h"]
 [ext_resource type="Script" path="res://scenes/world.gd" id="1_jqkmx"]
@@ -6,9 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://dh0aludwld4wu" path="res://scenes/Player/Bird.tscn" id="2_ysbte"]
 [ext_resource type="Texture2D" uid="uid://ba1fa0gev7g1r" path="res://assets/world/message.png" id="4_fcd5p"]
 [ext_resource type="Texture2D" uid="uid://buudy6cyb5p0c" path="res://assets/world/gameover.png" id="6_aa4w0"]
+[ext_resource type="PackedScene" uid="uid://cbyjwgundt7mw" path="res://scenes/limit.tscn" id="7_6gnpw"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_ar0rj"]
-font_size = 26
+[sub_resource type="LabelSettings" id="LabelSettings_2chv7"]
+font_size = 24
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_jqkmx")
@@ -32,32 +33,40 @@ centered = false
 wait_time = 1.5
 
 [node name="Bird" parent="." instance=ExtResource("2_ysbte")]
-position = Vector2(48, 256)
+position = Vector2(144, 303)
 
-[node name="Camera2D" type="Camera2D" parent="Bird"]
-offset = Vector2(96, 0)
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(144, 256)
 current = true
 limit_top = 0
 limit_bottom = 512
 
-[node name="TextEdit" type="Label" parent="Bird/Camera2D"]
-offset_left = -39.0
-offset_top = -246.0
-offset_right = 33.0
-offset_bottom = -206.0
-text = "0"
-label_settings = SubResource("LabelSettings_ar0rj")
-vertical_alignment = 1
+[node name="Messages" type="CanvasLayer" parent="Camera2D"]
 
-[node name="Message" type="Sprite2D" parent="."]
+[node name="StartGame" type="Sprite2D" parent="Camera2D/Messages"]
 position = Vector2(144, 256)
 texture = ExtResource("4_fcd5p")
 
-[node name="GameOver" type="Sprite2D" parent="."]
+[node name="GameOver" type="Sprite2D" parent="Camera2D/Messages"]
 visible = false
 top_level = true
 position = Vector2(144, 256)
 texture = ExtResource("6_aa4w0")
+
+[node name="Points" type="Label" parent="Camera2D/Messages"]
+offset_left = 8.0
+offset_top = 5.0
+offset_right = 48.0
+offset_bottom = 42.0
+text = "0"
+label_settings = SubResource("LabelSettings_2chv7")
+vertical_alignment = 1
+
+[node name="Limit" parent="Camera2D" instance=ExtResource("7_6gnpw")]
+position = Vector2(0, -256)
+
+[node name="Limit2" parent="Camera2D" instance=ExtResource("7_6gnpw")]
+position = Vector2(0, 257)
 
 [connection signal="timeout" from="Pipes/PipesSpawner" to="." method="_on_pipes_spawner_timeout"]
 [connection signal="player_die" from="Bird" to="." method="_on_bird_player_die"]
