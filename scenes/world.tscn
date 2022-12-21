@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cbafcb7m1ifu"]
+[gd_scene load_steps=9 format=3 uid="uid://cw1oip72161tm"]
 
 [ext_resource type="Texture2D" uid="uid://cm7itp1kkty7k" path="res://assets/world/bg-day.png" id="1_euk2h"]
 [ext_resource type="Script" path="res://scenes/world.gd" id="1_jqkmx"]
@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dh0aludwld4wu" path="res://scenes/Player/Bird.tscn" id="2_ysbte"]
 [ext_resource type="Texture2D" uid="uid://ba1fa0gev7g1r" path="res://assets/world/message.png" id="4_fcd5p"]
 [ext_resource type="Texture2D" uid="uid://buudy6cyb5p0c" path="res://assets/world/gameover.png" id="6_aa4w0"]
-[ext_resource type="PackedScene" uid="uid://cbyjwgundt7mw" path="res://scenes/limit.tscn" id="7_6gnpw"]
+[ext_resource type="PackedScene" uid="uid://cbyjwgundt7mw" path="res://scenes/Limit.tscn" id="7_6gnpw"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_2chv7"]
 font_size = 24
@@ -66,7 +66,7 @@ vertical_alignment = 1
 position = Vector2(0, -256)
 
 [node name="Limit2" parent="Camera2D" instance=ExtResource("7_6gnpw")]
-position = Vector2(0, 257)
+position = Vector2(0, 256)
 
 [connection signal="timeout" from="Pipes/PipesSpawner" to="." method="_on_pipes_spawner_timeout"]
 [connection signal="player_die" from="Bird" to="." method="_on_bird_player_die"]
